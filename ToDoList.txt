@@ -1,27 +1,9 @@
 -----Project To-Do List-----
 
-1. Install SDL
+1. Get SDL set up and create a working window.
 
-You'll have to install a few other things in order for it to work. While using the pi, type in the following:
+2. Create a system for loading images.
 
-sudo apt-get install mercurial
-hg clone https://hg.libsdl.org/SDL SDL
-cd SDL
-mkdir build
-cd build
-sudo apt-get install libxext-dev
-../configure
-make
-sudo make install
+3. Create a system for moving images around.
 
-Overall, it will take around 30 minutes to complete.
-
-Link the wiki can be found here: http://wiki.libsdl.org/Installation#Linux.2FUnix
-
-2. Get SDL set up and create a working window.
-
-3. Create a system for loading images.
-
-4. Create a system for moving images around.
-
-5. Create a system for collision checking.
+4. Create a system for collision checking.
