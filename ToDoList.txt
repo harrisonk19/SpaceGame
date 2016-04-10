@@ -1,9 +1,23 @@
 -----Project To-Do List-----
 
-1. Get SDL set up and create a working window.
+To install SDL:
 
-2. Create a system for loading images.
+apt-get install libsdl2-dev
 
-3. Create a system for moving images around.
+MAJOR STUFF
 
-4. Create a system for collision checking.
+1. Get SDL set up and create a working window. [x]
+
+2. Create a system for loading images. [x]
+
+3. Create a system for moving images around. [x]
+
+4. Create a system for collision checking. [ ]
+
+OTHER STUFF
+
+1. Shooting [ ]
+
+2. Cool menu bar that shows health and points [ ]
+
+3. Sound effects [ ]

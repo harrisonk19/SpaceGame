@@ -1,4 +1,5 @@
 #include "GameLoop.h"
+#include <iostream>
 
 const int SCREEN_WIDTH = 640;
 const int SCREEN_HEIGHT = 480;
@@ -17,7 +18,7 @@ void GameLoop::run()
 	screenSurface = SDL_GetWindowSurface(window);
 	
 	//load image stuff
-	GameObject* ship = new GameObject("images/ship.bmp");
+	GameObject* ship = new GameObject("images/ship.bmp"); //NOTE: fix this image
 	gameObjects.push_back(ship);
 
 	bool quit = false;
@@ -34,22 +35,88 @@ void GameLoop::run()
 			} 
 			else if( e.type == SDL_KEYDOWN)
 			{
-				switch( e.key.keysym.sym ) //up arrow key event
+				switch( e.key.keysym.sym ) //Keyboard events
 				{
-					case SDLK_UP:
+					case SDLK_UP: //up
+						std::cout << "Up Pressed" << std::endl;
+						upPressed = true;
+					break;
+
+					case SDLK_DOWN: //down
+						std::cout << "Down Pressed" << std::endl;
+						downPressed = true;
+					break;
+
+					case SDLK_SPACE: //spacebar
+						std::cout << "Space Pressed" << std::endl;
+						spacePressed = false;
+					break;
+				}
+			}
+			else if( e.type == SDL_KEYUP)
+			{
+				switch( e.key.keysym.sym ) //Keyboard events
+				{
+					case SDLK_UP: //up
+						std::cout << "Up Released" << std::endl;
+						upPressed = false;
+					break;
+
+					case SDLK_DOWN: //down
+						std::cout << "Down Released" << std::endl;
+						downPressed = false;
+					break;
+
+					case SDLK_SPACE: //spacebar
+						std::cout << "Space Released" << std::endl;
+						spacePressed = false;
 					break;
 				}
 			}
 		}
 
+		if(upPressed)
+		{
+			ship->Move(ship->getX(), ship->getY() - 2); //2 is the optimal movement speed
+		}
+		
+		if(downPressed)
+		{
+			ship->Move(ship->getX(), ship->getY() + 2);
+		}
+
 		//Draw stuff
 		for(int i = 0; i < gameObjects.size(); i++)
 		{
-			SDL_BlitSurface(gameObjects.at(i)->getSurface(), 0, screenSurface, 0);
+			GameObject* currentObj = gameObjects.at(i); //moving stuff
+
+			SDL_Rect currentRect;
+			currentRect.x = currentObj->getX();
+			currentRect.y = currentObj->getY();
+			currentRect.w = currentObj->getSurface()->w;
+			currentRect.h = currentObj->getSurface()->h;
+			SDL_BlitSurface(currentObj->getSurface(), 0, screenSurface, &currentRect);
 		}
 
 		SDL_UpdateWindowSurface(window);
+		
+		CheckBounds(ship);
 
 		SDL_Delay(1000.0 / (float)fps);
+	}
+
+}
+
+void GameLoop::CheckBounds(GameObject* object)
+{
+
+	if(object->getY() >= SCREEN_HEIGHT - object->getSurface()->h) //bottom of screen
+	{
+		object->Move(object->getX(), SCREEN_HEIGHT - object->getSurface()->h);
+	}
+
+	else if(object->getY() <= 0) // top of screen
+	{
+		object->Move(object->getX(), 0);
 	}
 }

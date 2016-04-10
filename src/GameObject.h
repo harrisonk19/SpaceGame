@@ -13,10 +13,14 @@ class GameObject
 
 		SDL_Surface* getSurface();
 		
+		int getX();
+		int getY();
+		
 	private:
 
 		SDL_Surface* surf;
-		int x,y;
+		int x;
+		int y;
 };
 
 #endif
