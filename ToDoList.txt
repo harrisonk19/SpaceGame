@@ -4,6 +4,8 @@ To install SDL:
 
 apt-get install libsdl2-dev
 
+compiler flags = g++ *.cpp -lSDL2
+
 MAJOR STUFF
 
 1. Get SDL set up and create a working window. [x]
@@ -18,6 +20,8 @@ OTHER STUFF
 
 1. Shooting [ ]
 
-2. Cool menu bar that shows health and points [ ]
+2. Make the enemies move left across the screen [ ]
 
-3. Sound effects [ ]
+3. Cool menu bar that shows health and points [ ] (crude but not finished)
+
+4. Sound effects [ ]

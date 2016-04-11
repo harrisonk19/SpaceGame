@@ -9,7 +9,7 @@ class GameObject
 	public:
 		GameObject(std::string imageFilename);
 
-		void Move(int newX, int newY);
+		void Move(int newX, int newY); // handles moving objects
 
 		SDL_Surface* getSurface();
 		

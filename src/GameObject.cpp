@@ -10,7 +10,7 @@ SDL_Surface* GameObject::getSurface()
 	return surf;
 }
 
-void GameObject::Move(int newX, int newY)
+void GameObject::Move(int newX, int newY)// this acts as a setter for both x and y
 {
 	x = newX;
 	y = newY;

@@ -18,8 +18,21 @@ void GameLoop::run()
 	screenSurface = SDL_GetWindowSurface(window);
 	
 	//load image stuff
-	GameObject* ship = new GameObject("images/ship.bmp"); //NOTE: fix this image
+	GameObject* ship = new GameObject("images/PlayerShip.bmp"); //PlayerShip
+	ship->Move(0, SCREEN_HEIGHT - 310); //start playerShip halfway down the screen
 	gameObjects.push_back(ship);
+
+	GameObject* divider = new GameObject("images/divider.bmp"); //divider for heads-up display thing
+	divider->Move(0, SCREEN_HEIGHT - 110); //set the divider bar at the location of 530px down
+	gameObjects.push_back(divider);
+
+	GameObject* health = new GameObject("images/HealthBar/Full.bmp"); //full HP bar
+	health->Move(0, SCREEN_HEIGHT - 105); //set health bar at this position
+	gameObjects.push_back(health);
+
+	GameObject* score = new GameObject("images/Score.bmp"); // score marker
+	score->Move(SCREEN_WIDTH - 125, SCREEN_HEIGHT - 105); //set score at this posion
+	gameObjects.push_back(score);
 
 	bool quit = false;
 
@@ -86,16 +99,17 @@ void GameLoop::run()
 		}
 
 		//Draw stuff
+
 		for(int i = 0; i < gameObjects.size(); i++)
 		{
-			GameObject* currentObj = gameObjects.at(i); //moving stuff
+			GameObject* currentObj = gameObjects.at(i); //draw a rectangle around the image.
 
 			SDL_Rect currentRect;
 			currentRect.x = currentObj->getX();
 			currentRect.y = currentObj->getY();
 			currentRect.w = currentObj->getSurface()->w;
 			currentRect.h = currentObj->getSurface()->h;
-			SDL_BlitSurface(currentObj->getSurface(), 0, screenSurface, &currentRect);
+			SDL_BlitSurface(currentObj->getSurface(), 0, screenSurface, &currentRect); //rectangle continually blitted
 		}
 
 		SDL_UpdateWindowSurface(window);
@@ -110,9 +124,9 @@ void GameLoop::run()
 void GameLoop::CheckBounds(GameObject* object)
 {
 
-	if(object->getY() >= SCREEN_HEIGHT - object->getSurface()->h) //bottom of screen
+	if(object->getY() >= 370 - object->getSurface()->h) //bottom of screen
 	{
-		object->Move(object->getX(), SCREEN_HEIGHT - object->getSurface()->h);
+		object->Move(object->getX(), 370 - object->getSurface()->h);
 	}
 
 	else if(object->getY() <= 0) // top of screen
